@@ -1,5 +1,4 @@
-#we create an array with all of the students
-
+#we invite the user to create an array of students
 def input_students
   puts "Please enter the names of the students."
   puts "To finish, just hit return twice"
@@ -9,7 +8,7 @@ def input_students
   name = gets.chomp
 #this will enter the students name as long as they did not enter an empty name
   while !name.empty? do
-    #add the name to the array
+    #create a hash with the name and cohort and add this to the array
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students"
     
@@ -19,15 +18,24 @@ def input_students
   students
 end
 
-
 def print_header  
   puts "The students of Villains Academy"
   puts "-------------"
 end
 
-def print(students)
+#A method for the user to select a letter.
+def select_letter
+  puts "Please choose a letter."
+  letter = gets.chomp.downcase
+end
+
+#this method takes the array of students and also the chosen letter as parameters
+def print(students, letter)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    #check for the letter in the students name
+    if student[:name][0].downcase == letter
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
@@ -36,6 +44,7 @@ def print_footer(students)
 end
 
 students = input_students
+letter = select_letter
 print_header
-print(students)
+print(students, letter)
 print_footer(students)
