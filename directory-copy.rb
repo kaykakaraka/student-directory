@@ -25,12 +25,11 @@ end
 
 
 def print(students)
-  students.each_with_index do |student, index|
-    #check if student's name is shorter than 12 characters and print if so
-    if student[:name].length < 12
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  counter = 0
+    while students.length > counter do
+      puts "#{counter+1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+      counter += 1
     end
-  end
 end
 
 def print_footer(students)
