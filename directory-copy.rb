@@ -23,17 +23,11 @@ def print_header
   puts "-------------"
 end
 
-#A method for the user to select a letter.
-def select_letter
-  puts "Please choose a letter."
-  letter = gets.chomp.downcase
-end
 
-#this method takes the array of students and also the chosen letter as parameters
-def print(students, letter)
+def print(students)
   students.each_with_index do |student, index|
-    #check for the letter in the students name
-    if student[:name][0].downcase == letter
+    #check if student's name is shorter than 12 characters and print if so
+    if student[:name].length < 12
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
@@ -44,7 +38,6 @@ def print_footer(students)
 end
 
 students = input_students
-letter = select_letter
 print_header
-print(students, letter)
+print(students)
 print_footer(students)
