@@ -9,6 +9,10 @@ def input_students
   name = gets.chomp
 #this will enter the students name as long as they did not enter an empty name
   while !name.empty? do
+    #ask for cohort
+    puts "Cohort"
+    cohort = gets.chomp.to_sym
+      if cohort.empty? then cohort = "<no cohort listed>" end
     #ask for further details
     puts "Hobbies?"
     hobbies = gets.chomp
@@ -17,7 +21,7 @@ def input_students
     height = gets.chomp
       if height.empty? then height = "<no height listed>" end
     #create a hash with the details and add this to the array
-    students << {name: name, cohort: :november, hobbies: hobbies, height: height}
+    students << {name: name, cohort: cohort, hobbies: hobbies, height: height}
     puts "Now we have #{students.count} students"
     
     puts "Now for the next student. Name?"
