@@ -6,7 +6,7 @@ def input_students
   students = []
 #ask for the name
   puts "Name?"
-  name = gets.chomp
+  name = gets.gsub(/\n/, "")
 #this will enter the students name as long as they did not enter an empty name
   while !name.empty? do
     #ask for cohort
