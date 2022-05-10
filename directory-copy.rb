@@ -13,22 +13,20 @@ def input_students
     puts "Cohort"
     cohort = gets.chomp.to_sym
       if cohort.empty? then cohort = "<no cohort listed>" end
-    #ask for further details
-    puts "Hobbies?"
-    hobbies = gets.chomp
-      if hobbies.empty? then hobbies = "<no hobbies listed>" end
-    puts "Height?"
-    height = gets.chomp
-      if height.empty? then height = "<no height listed>" end
     #create a hash with the details and add this to the array
-    students << {name: name, cohort: cohort, hobbies: hobbies, height: height}
-    puts "Now we have #{students.count} students"
-    
+    students << {name: name, cohort: cohort}
+      if students.count == 1
+        puts "Now we have #{students.count} student"
+      else
+        puts "Now we have #{students.count} students"
+      end
+
     puts "Now for the next student. Name?"
     name = gets.chomp
   end
-
-  students
+  
+  #sort students by the cohort value so that they print next to students of the same cohort
+  students.sort_by {|student| student[:cohort]}
 end
 
 def print_header  
@@ -41,17 +39,20 @@ def print(students)
   counter = 0
     while students.length > counter do
       puts "#{counter+1}. #{students[counter][:name]} (#{students[counter][:cohort]} cohort)".center(60)
-      puts "Hobbies: #{students[counter][:hobbies]}".center(60)
-      puts "Height: #{students[counter][:height]}".center(60)
       counter += 1
     end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students".center(60)
+  if students.count == 1
+    puts "Overall, we have #{students.count} great student".center(60)
+  else
+    puts "Overall, we have #{students.count} great student".center(60)
+  end
 end
 
 students = input_students
 print_header
 print(students)
 print_footer(students)
+
