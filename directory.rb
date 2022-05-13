@@ -21,7 +21,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(STDIN.gets.chomp)
+    menu(STDIN.gets.chomp)
   end
 end
 
@@ -33,12 +33,12 @@ def print_menu
   puts "9. Exit"
 end
 
-def process(selection)
+def menu(selection)
   menu = {
     "1" => method(:input_students),
     "2" => method(:show_students),
-    "3" => method(:save_students),
-    "4" => method(:load_students),
+    "3" => method(:ask_for_filename_to_save),
+    "4" => method(:ask_for_filename_to_load),
     "9" => method(:exit)
   } 
   if menu[selection] == nil
@@ -69,9 +69,9 @@ def show_students
   print_footer
 end
 
-def save_students
+def save_students(filename)
   #open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   #iterate over the students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -99,6 +99,18 @@ def try_load_students(filename = "students.csv")
     puts "Sorry, #{filename} doesn't exist."
     exit
   end
+end
+
+def ask_for_filename_to_save
+  puts "Please enter the file name to save to."
+  filename = STDIN.gets.chomp
+  save_students(filename)
+end
+
+def ask_for_filename_to_load
+  puts "Please enter the file name to load from."
+  filename = STDIN.gets.chomp
+  load_students(filename)
 end
 
 def add_students(name, cohort = :november)
