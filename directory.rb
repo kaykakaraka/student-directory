@@ -9,7 +9,7 @@ def input_students
 #this will enter the students name as long as they did not enter an empty name
   while !name.empty? do
     #add the name to the array
-    @students << {name: name, cohort: :november}
+    add_students(name)
     puts "Now we have #{@students.count} students"
     
     name = STDIN.gets.chomp
@@ -87,7 +87,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+  add_students(name, cohort)
   end
   file.close
 end
@@ -102,6 +102,10 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist."
     exit
   end
+end
+
+def add_students(name, cohort = :november)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 try_load_students
