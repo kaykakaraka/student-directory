@@ -44,6 +44,7 @@ def menu(selection)
   if menu[selection] == nil
     puts "I don't understand, try again"
   else 
+    puts "Option #{selection} selected."
     menu[selection].()
   end
 end
